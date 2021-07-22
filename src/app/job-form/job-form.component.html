@@ -1,0 +1,249 @@
+<div class="container-fluid">
+    <div class="card col-md-10 col-lg-10 col-xs-12 mx-auto mt-2 mb-2">
+        <form [formGroup]="jobForm" (ngSubmit)="onSubmit(jobForm)">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="Name"><strong>Name</strong></label>
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" formControlName="Name" name="Name" placeholder="Name" required>
+                            <div *ngIf="f.Name.invalid && (f.Name.dirty || f.Name.touched)">
+                                <p *ngIf="f.Name.errors.required" class="text-danger">
+                                Name is necessary
+                                </p>
+                                <p *ngIf="f.Name.errors.pattern" class="text-danger">
+                                Only alphabets allowed
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Email"><strong>Email</strong></label>
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" formControlName="Email" name="Email" placeholder="Email" required>
+                            <div *ngIf="f.Email.invalid && (f.Email.dirty || f.Email.touched)">
+                                <p *ngIf="f.Email.errors.required" class="text-danger">
+                                  Email is necessary
+                                </p>
+                                <p *ngIf="f.Email.errors.email" class="text-danger">
+                                  Email must be a valid email address
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Address"><strong>Address</strong></label>
+                    <textarea class="form-control" formControlName="Address" name="Address" cols="30" rows="5"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="Country"><strong>Country</strong></label>
+                        <div class="form-group">
+
+                            <select formControlName="Country" name="Country" class="form-control">
+                                <option value="">-- Select Country --</option>
+                                <option value="India">India</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="State"><strong>State</strong></label>
+                        <div class="form-group">
+
+                            <select formControlName="State" name="State" class="form-control">
+                                <option value="">-- Select State --</option>
+                                <option value="Andhra pradesh">Andhra pradesh</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="City"><strong>City</strong></label>
+                        <div class="form-group">
+
+                            <select formControlName="City" name="City" class="form-control">
+                                <option value="">-- Select City --</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- PREFERRED LOCATION -->
+                <div>
+                    <label><strong>Preferred Locations</strong></label>
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" formControlName="Location" value="Bangalore">
+                                    Bangalore
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" formControlName="Location" value="Chennai">
+                                    Chennai
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" formControlName="Location" value="Mumbai">
+                                    Mumbai
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" formControlName="Location" value="Delhi">
+                                    Delhi
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- EXPERIENCE -->
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        
+                        <div class="row">
+                            <label class="ml-3"><strong>Are you Experienced</strong></label>
+                            <div class="col-md-2">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" formControlName="Experience" value="Yes">
+                                        Yes
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" formControlName="Experience" value="No">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label><strong>Years of Experience</strong></label>
+                            
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <input type="text" formControlName="Experience" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- SKILLS -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Skills</h4>
+                    </div>
+                    <div class="card-body">
+                        <div formArrayName="data">
+                        <div *ngFor="let item of data.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="SkillName"><strong>Skill Name</strong></label>
+                                <div class="form-group">
+        
+                                    <input type="text" class="form-control" formControlName="SkillName" placeholder="Skill Name">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="Description"><strong>Description</strong></label>
+                                <div class="form-group">
+                                    <textarea class="form-control" formControlName="Description" cols="30" rows="1" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="SkillLevel"><strong>Skill Level</strong></label>
+                                <div class="form-group">
+        
+                                    <select formControlName="SkillLevel" class="form-control">
+                                        <option value="">-- Select Skill --</option>
+                                        <option value="Beginner">Beginner</option>
+                                        <option value="Intermediate">Intermediate</option>
+                                        <option value="Advanced">Advanced</option>
+                                        <option value="Expert">Expert</option>
+                                    </select>
+        
+                                </div>
+                            </div> 
+                            <div class="col-md-3">
+                                <label *ngIf="pointIndex!=0"><strong>DELETE</strong></label>
+                                <div *ngIf="pointIndex!=0">
+                                    <button type="button" class="btn btn-danger" (click)="removeWorkout(pointIndex)" >REMOVE</button>
+                                </div>    
+                            </div>
+                        </div>
+                        
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" (click)="addWorkout()">ADD SKILL</button>
+                        </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                 
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" formControlName="importFile" id="importFile" (change)="onFileChange($event.target.files)">
+                    <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose file</label>
+                </div>
+                
+                <div class="card-footer text-center">
+                    <button type="button" class="btn btn-primary"
+                    [disabled]="!jobForm.valid" data-toggle="modal" data-target="#modal-id">Submit</button>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="modal-id">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                           
+                        </div>
+                        <div class="modal-body">
+                            Are you sure want to submit the form
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-success"  type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
